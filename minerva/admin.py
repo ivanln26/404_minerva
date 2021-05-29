@@ -3,6 +3,12 @@ from django.contrib import admin
 from . import models
 
 
+@admin.register(models.CartItem)
+class CartItemAdmin(admin.ModelAdmin):
+
+    pass
+
+
 @admin.register(models.Category)
 class CategoryAdmin(admin.ModelAdmin):
 
@@ -23,12 +29,6 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(models.Sale)
 class SaleAdmin(admin.ModelAdmin):
-
-    pass
-
-
-@admin.register(models.Sale_Product)
-class Sale_ProductAdmin(admin.ModelAdmin):
 
     pass
 

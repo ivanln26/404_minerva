@@ -41,7 +41,7 @@ class Sale(models.Model):
     create_at = models.DateField(auto_now_add=True)
 
 
-class Sale_Product(models.Model):
+class CartItem(models.Model):
 
     sale = models.ForeignKey(Sale, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
