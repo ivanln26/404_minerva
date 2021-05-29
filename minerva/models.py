@@ -15,6 +15,9 @@ class Client(models.Model):
     phone = models.CharField(max_length=20, blank=True)
     email = models.EmailField(blank=True)
 
+    def __str__(self):
+        return f'{self.last_name}, {self.first_name}'
+
 
 class Category(models.Model):
 
@@ -23,6 +26,9 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = 'categories'
 
+    def __str__(self):
+        return f'{self.name}'
+
 
 class Product(models.Model):
 
@@ -30,6 +36,9 @@ class Product(models.Model):
     price = models.FloatField()
     stock = models.IntegerField(default=0)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Sale(models.Model):
@@ -40,6 +49,9 @@ class Sale(models.Model):
     location = models.CharField(max_length=20)
     create_at = models.DateField(auto_now_add=True)
 
+    def __str__(self):
+        return f'{self.id}: {self.state}'
+
 
 class CartItem(models.Model):
 
@@ -47,3 +59,6 @@ class CartItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField()
     unitary_price = models.FloatField()
+
+    def __str__(self):
+        return f'{self.id}: {self.product} - {self.quantity}'
