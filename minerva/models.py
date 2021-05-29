@@ -44,19 +44,30 @@ class Product(models.Model):
 
 class Sale(models.Model):
 
-    PREORDER = "PO"
+    PREORDER = 'PO'
     PENDING = 'PD'
     FINALIZED = 'FI'
-    STATE_CHOICES =[(PREORDER, 'Pre-Venta'),(PENDING, 'En proceso'),(FINALIZED, 'Concretado')]
-    OFFICE = "OF"
-    MERCADOLIBRE = "ML"
-    WEBSITE = "WS"
-    INSTAGRAM = "IG"
-    LOCATION_CHOICES = [(OFFICE, 'Oficina'), (MERCADOLIBRE, 'Mercado Libre'),(WEBSITE, 'Pagina Web'), (INSTAGRAM, 'Instagram')]
+    STATE_CHOICES = [
+        (PREORDER, 'Pre-Venta'),
+        (PENDING, 'En proceso'),
+        (FINALIZED, 'Concretado'),
+    ]
+
+    OFFICE = 'OF'
+    MERCADO_LIBRE = 'ML'
+    WEBSITE = 'WS'
+    INSTAGRAM = 'IG'
+    LOCATION_CHOICES = [
+        (OFFICE, 'Oficina'),
+        (MERCADO_LIBRE, 'Mercado Libre'),
+        (WEBSITE, 'Pagina Web'),
+        (INSTAGRAM, 'Instagram'),
+    ]
+
     state = models.CharField(max_length=2, choices=STATE_CHOICES, default=PENDING)
     vendor = models.ForeignKey(Vendor, on_delete=models.SET_NULL, null=True)
     client = models.ForeignKey(Client, on_delete=models.SET_NULL, null=True)
-    location = models.CharField(max_length=2,choices=LOCATION_CHOICES, default=MERCADOLIBRE)
+    location = models.CharField(max_length=2, choices=LOCATION_CHOICES, default=MERCADO_LIBRE)
     create_at = models.DateField(auto_now_add=True)
 
     def __str__(self):
