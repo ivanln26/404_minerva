@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MinValueValidator
 from django.db import models
 
 
@@ -33,8 +34,8 @@ class Category(models.Model):
 class Product(models.Model):
 
     name = models.CharField(max_length=25)
-    price = models.FloatField()
-    stock = models.IntegerField(default=0)
+    price = models.FloatField(validators=[MinValueValidator(0)])
+    stock = models.PositiveSmallIntegerField(default=0)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
@@ -66,8 +67,8 @@ class CartItem(models.Model):
 
     sale = models.ForeignKey(Sale, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
-    quantity = models.IntegerField()
-    unitary_price = models.FloatField()
+    quantity = models.PositiveSmallIntegerField()
+    unitary_price = models.FloatField(validators=[MinValueValidator(0)])
 
     def __str__(self):
         return f'{self.id}: {self.product} - {self.quantity}'
