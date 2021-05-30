@@ -1,5 +1,11 @@
 from django.shortcuts import render
 
+from . import models
+
 
 def index(request):
-    return render(request, 'index.html')
+    products = models.Product.objects.all()
+    ctx = {
+        'products': products
+    }
+    return render(request, 'index.html', ctx)
