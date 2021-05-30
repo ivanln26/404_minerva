@@ -30,7 +30,7 @@ class ProductAdmin(admin.ModelAdmin):
 @admin.register(models.Sale)
 class SaleAdmin(admin.ModelAdmin):
 
-    list_display = ('id', 'state', 'vendor', 'client', 'location', 'create_at')
+    list_display = ('id', 'state', 'vendor', 'client', 'location', 'created_at')
 
 
 @admin.register(models.Vendor)
