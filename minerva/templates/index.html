@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Productos</h1>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for product in products %}
+      <div class="col">
+        <div class="card">
+          <img src="https://ursd.org/wp-content/uploads/2020/12/1.png">
+          <div class="card-body">
+            <h4 class="card-title">{{ product.name }}</h4>
+            <h5 class="card-title">$ {{ product.price }}</h5>
+            <a href="#" class="card-link">Mas informacion</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
+
+{% block footer %}
+  {% include 'footer.html' %}
+{% endblock %}
