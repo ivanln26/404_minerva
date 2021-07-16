@@ -31,6 +31,35 @@ class ClientCreateView(View):
         return redirect('client_list')
 
 
+class ClientEditView(View):
+
+    def get(self, request, id):
+        try:
+            client = models.Client.objects.get(pk=id)
+            ctx = {
+                'client': client,
+            }
+            return render(request, 'client_edit.html', ctx)
+        except ObjectDoesNotExist:
+            messages.error(request, 'No se pudo encontrar el cliente.', 'alert-danger')
+            return redirect('client_list')
+
+    def post(self, request, id):
+        try:
+            client = models.Client.objects.get(pk=id)
+            form = ClientForm(request.POST, instance=client)
+            if not form.is_valid():
+                # TODO(any): show form errors.
+                messages.error(request, 'Error en formulario.', 'alert-danger')
+                return redirect('client_edit', id=id)
+            form.save()
+            messages.success(request, 'Cliente editado correctamente.', 'alert-success')
+            return redirect('client_list')
+        except ObjectDoesNotExist:
+            messages.error(request, 'No se pudo encontrar el cliente.', 'alert-danger')
+            return redirect('client_list')
+
+
 class ClientListView(View):
 
     def get(self, request):

@@ -4,6 +4,14 @@
 
 {% block content %}
   <h1>Lista de clientes</h1>
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button class="btn-close" data-bs-dismiss="alert" aria-label="Close" type="button"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
     <a class="btn btn-outline-dark" href="{% url 'client_create' %}" role="button">
       Añadir cliente
@@ -32,7 +40,7 @@
             <td>{{ client.phone|default:"-" }}</td>
             <td>{{ client.email|default:"-" }}</td>
             <td>
-              <a class="btn btn-sm btn-outline-dark" href="#" role="button">Editar</a>
+              <a class="btn btn-sm btn-outline-dark" href="{% url 'client_edit' client.id %}" role="button">Editar</a>
             </td>
           </tr>
         {% endfor %}
