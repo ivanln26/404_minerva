@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.views import LoginView
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect, render
 from django.views import View
 
@@ -19,7 +20,7 @@ class ProductCreateView(View):
 
     def get(self, request):
         return render(request, 'product_create.html')
-    
+
     def post(self, request):
         form = ProductForm(request.POST)
         if form.is_valid():
@@ -35,10 +36,25 @@ class ProductDeleteView(View):
     def get(self, request, id):
         try:
             product = models.Product.objects.get(pk=id)
+            product.delete()
             messages.info(request, 'Producto eliminado correctamente.', 'alert-dark')
-        except:
+        except ObjectDoesNotExist:
             messages.error(request, 'No se pudo eliminar el producto.', 'alert-danger')
         finally:
+            return redirect('product_list')
+
+
+class ProductDetailView(View):
+
+    def get(self, request, id):
+        try:
+            product = models.Product.objects.get(pk=id)
+            ctx = {
+                'product': product,
+            }
+            return render(request, 'product_detail.html', ctx)
+        except ObjectDoesNotExist:
+            messages.error(request, 'No se pudo encontrar el producto.', 'alert-danger')
             return redirect('product_list')
 
 
