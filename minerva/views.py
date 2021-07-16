@@ -1,5 +1,6 @@
-from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import LoginView
 from django.shortcuts import render
+from django.views import View
 
 from . import models
 from .forms import LoginForm
@@ -13,7 +14,16 @@ def index(request):
     return render(request, 'index.html', ctx)
 
 
-class LoginView(auth_views.LoginView):
+class ProductListView(View):
+
+    def get(self, request):
+        ctx = {
+            'products': models.Product.objects.all(),
+        }
+        return render(request, 'product_list.html', ctx)
+
+
+class LoginView(LoginView):
 
     template_name = 'login.html'
     authentication_form = LoginForm
