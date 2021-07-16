@@ -4,6 +4,11 @@
 
 {% block content %}
   <h1>Lista de clientes</h1>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <a class="btn btn-outline-dark" href="{% url 'client_create' %}" role="button">
+      Añadir cliente
+    </a>
+  </div>
   <div class="table-responsive">
     <table class="table table-hover">
       <thead>
@@ -27,11 +32,7 @@
             <td>{{ client.phone|default:"-" }}</td>
             <td>{{ client.email|default:"-" }}</td>
             <td>
-              <div class="btn-group btn-group-sm" role="group">
-                <a class="btn btn-outline-dark" href="#" role="button">Ver</a>
-                <a class="btn btn-outline-dark" href="#" role="button">Editar</a>
-                <a class="btn btn-outline-danger" href="#" role="button">Eliminar</a>
-              </div>
+              <a class="btn btn-sm btn-outline-dark" href="#" role="button">Editar</a>
             </td>
           </tr>
         {% endfor %}

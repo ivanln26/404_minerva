@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Añadir cliente{% endblock %}
+
+{% block content %}
+  <h1>Añadir cliente</h1>
+  <form action="" method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label class="form-label" for="id_first_name">Nombre</label>
+      <input id="id_first_name" class="form-control" name="first_name" maxlength="15" required type="text">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="id_last_name">Apellido</label>
+      <input id="id_last_name" class="form-control" name="last_name" maxlength="15" required type="text">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="id_dni">DNI</label>
+      <input id="id_dni" class="form-control" name="dni" maxlength="10" type="text">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="id_phone">Teléfono</label>
+      <input id="id_phone" class="form-control" name="phone" maxlength="20" type="text">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="id_email">Email</label>
+      <input id="id_email" class="form-control" name="email" type="email">
+    </div>
+    <button class="btn btn-primary" type="submit">Añadir</button>
+  </form>
+{% endblock %}

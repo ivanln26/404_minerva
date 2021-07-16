@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 from django.views import View
 
 from . import models
-from .forms import LoginForm, ProductForm
+from .forms import ClientForm, LoginForm, ProductForm
 
 
 def index(request):
@@ -14,6 +14,21 @@ def index(request):
         'products': products
     }
     return render(request, 'index.html', ctx)
+
+
+class ClientCreateView(View):
+
+    def get(self, request):
+        return render(request, 'client_create.html')
+
+    def post(self, request):
+        form = ClientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Cliente añadido correctamente.', 'alert-success')
+        else:
+            messages.error(request, 'No se pudo añadir un nuevo cliente.', 'alert-danger')
+        return redirect('client_list')
 
 
 class ClientListView(View):
