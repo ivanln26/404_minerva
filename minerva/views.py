@@ -1,9 +1,10 @@
+from django.contrib import messages
 from django.contrib.auth.views import LoginView
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views import View
 
 from . import models
-from .forms import LoginForm
+from .forms import LoginForm, ProductForm
 
 
 def index(request):
@@ -12,6 +13,21 @@ def index(request):
         'products': products
     }
     return render(request, 'index.html', ctx)
+
+
+class ProductCreate(View):
+
+    def get(self, request):
+        return render(request, 'product_create.html')
+    
+    def post(self, request):
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Producto añadido correctamente.', 'alert-success')
+        else:
+            messages.error(request, 'No se pudo añadir el producto.', 'alert-danger')
+        return redirect('product_list')
 
 
 class ProductListView(View):
