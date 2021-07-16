@@ -15,7 +15,7 @@ def index(request):
     return render(request, 'index.html', ctx)
 
 
-class ProductCreate(View):
+class ProductCreateView(View):
 
     def get(self, request):
         return render(request, 'product_create.html')
@@ -28,6 +28,18 @@ class ProductCreate(View):
         else:
             messages.error(request, 'No se pudo añadir el producto.', 'alert-danger')
         return redirect('product_list')
+
+
+class ProductDeleteView(View):
+
+    def get(self, request, id):
+        try:
+            product = models.Product.objects.get(pk=id)
+            messages.info(request, 'Producto eliminado correctamente.', 'alert-dark')
+        except:
+            messages.error(request, 'No se pudo eliminar el producto.', 'alert-danger')
+        finally:
+            return redirect('product_list')
 
 
 class ProductListView(View):
