@@ -9,8 +9,3 @@ class LoginForm(AuthenticationForm):
         strip=False,
         widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'class': 'form-control'}),
     )
-
-    error_messages = {
-        'invalid_login': 'Por favor ingrese un nombre de usuario y contraseña correctos.',
-        'inactive': 'Esta cuenta está inactiva.',
-    }

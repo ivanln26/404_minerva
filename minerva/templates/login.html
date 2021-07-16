@@ -5,7 +5,10 @@
 {% block content %}
   <h1>Iniciar Sesión</h1>
   {% if form.errors %}
-    {{ form.errors }}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      Por favor ingrese un nombre de usuario y contraseña correctos.
+      <button class="btn-close" data-bs-dismiss="alert" aria-label="Close" type="button"></button>
+    </div>
   {% endif %}
   <form action="{% url 'login' %}" method="post">
     {% csrf_token %}
