@@ -40,7 +40,7 @@
           <td>
             <div class="btn-group btn-group-sm" role="group">
               <a class="btn btn-outline-dark" href="{% url 'product_detail' product.id %}" role="button">Ver</a>
-              <a class="btn btn-outline-dark" href="#" role="button">Editar</a>
+              <a class="btn btn-outline-dark" href="{% url 'product_edit' product.id %}" role="button">Editar</a>
               <a class="btn btn-outline-danger" href="{% url 'product_delete' product.id %}" role="button">Eliminar</a>
             </div>
           </td>

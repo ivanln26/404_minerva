@@ -58,6 +58,35 @@ class ProductDetailView(View):
             return redirect('product_list')
 
 
+class ProductEditView(View):
+
+    def get(self, request, id):
+        try:
+            product = models.Product.objects.get(pk=id)
+            ctx = {
+                'product': product,
+            }
+            return render(request, 'product_edit.html', ctx)
+        except ObjectDoesNotExist:
+            messages.error(request, 'No se pudo encontrar el producto.', 'alert-danger')
+            return redirect('product_list')
+
+    def post(self, request, id):
+        try:
+            product = models.Product.objects.get(pk=id)
+            form = ProductForm(request.POST, instance=product)
+            if not form.is_valid():
+                # TODO(any): show form errors.
+                messages.error(request, 'Error en formulario.', 'alert-danger')
+                return redirect('product_edit', id=id)
+            form.save()
+            messages.success(request, 'Producto editado correctamente.', 'alert-success')
+            return redirect('product_list')
+        except ObjectDoesNotExist:
+            messages.error(request, 'No se pudo encontrar el producto.', 'alert-danger')
+            return redirect('product_list')
+
+
 class ProductListView(View):
 
     def get(self, request):
