@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Iniciar Sesión{% endblock %}
+
+{% block content %}
+  <h1>Iniciar Sesión</h1>
+  {% if form.errors %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      Por favor ingrese un nombre de usuario y contraseña correctos.
+      <button class="btn-close" data-bs-dismiss="alert" aria-label="Close" type="button"></button>
+    </div>
+  {% endif %}
+  <form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label class="form-label" for="{{ form.username.id_for_label }}">Nombre de usuario</label>
+      {{ form.username }}
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="{{ form.password.id_for_label }}">Contraseña</label>
+      {{ form.password }}
+    </div>
+    <button class="btn btn-primary" type="submit">Continuar</button>
+  </form>
+{% endblock %}
