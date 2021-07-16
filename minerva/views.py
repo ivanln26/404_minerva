@@ -16,6 +16,15 @@ def index(request):
     return render(request, 'index.html', ctx)
 
 
+class ClientListView(View):
+
+    def get(self, request):
+        ctx = {
+            'clients': models.Client.objects.all(),
+        }
+        return render(request, 'client_list.html', ctx)
+
+
 class ProductCreateView(View):
 
     def get(self, request):

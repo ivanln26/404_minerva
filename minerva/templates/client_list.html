@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Clientes{% endblock %}
+
+{% block content %}
+  <h1>Lista de clientes</h1>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>DNI</th>
+          <th>Teléfono</th>
+          <th>Email</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for client in clients %}
+          <tr>
+            <td>{{ client.id }}</td>
+            <td>{{ client.first_name }}</td>
+            <td>{{ client.last_name }}</td>
+            <td>{{ client.dni }}</td>
+            <td>{{ client.phone|default:"-" }}</td>
+            <td>{{ client.email|default:"-" }}</td>
+            <td>
+              <div class="btn-group btn-group-sm" role="group">
+                <a class="btn btn-outline-dark" href="#" role="button">Ver</a>
+                <a class="btn btn-outline-dark" href="#" role="button">Editar</a>
+                <a class="btn btn-outline-danger" href="#" role="button">Eliminar</a>
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
