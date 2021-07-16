@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %}Añadir producto{% endblock %}
+{% block title %}Editar producto{% endblock %}
 
 {% block content %}
-  <h1>Añadir producto</h1>
+  <h1>Editar {{ product.name }}</h1>
   {% if messages %}
     {% for message in messages %}
       <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
@@ -28,7 +28,7 @@
     </div>
     <div class="mb-3">
       <label class="form-label" for="id_category">Categoría</label>
-      <select id="id_category" class="form-control" name="category" required>
+      <select selected={{product.category}} id="id_category" class="form-control" name="category" required>
         <option value="" selected>---------</option>
         <option value="1">Placa de video</option>
         <option value="2">Rizer</option>
