@@ -19,7 +19,11 @@ def index(request):
 class ProductCreateView(View):
 
     def get(self, request):
-        return render(request, 'product_create.html')
+        categories = models.Category.objects.all()
+        ctx = {
+            'categories': categories,
+        }
+        return render(request, 'product_create.html', ctx)
 
     def post(self, request):
         form = ProductForm(request.POST)
@@ -61,10 +65,12 @@ class ProductDetailView(View):
 class ProductEditView(View):
 
     def get(self, request, id):
+        categories = models.Category.objects.all()
         try:
             product = models.Product.objects.get(pk=id)
             ctx = {
                 'product': product,
+                'categories': categories
             }
             return render(request, 'product_edit.html', ctx)
         except ObjectDoesNotExist:

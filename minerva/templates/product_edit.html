@@ -28,10 +28,15 @@
     </div>
     <div class="mb-3">
       <label class="form-label" for="id_category">Categoría</label>
-      <select selected={{product.category}} id="id_category" class="form-control" name="category" required>
-        <option value="" selected>---------</option>
-        <option value="1">Placa de video</option>
-        <option value="2">Rizer</option>
+      <select id="id_category" class="form-control" name="category" required>
+        <option value="">---------</option>
+        {% for category in categories %}
+          <option value="{{ forloop.counter }}"
+            {% if category.id == product.category.id %}
+              selected
+            {% endif %}
+          >{{ category }}</option>
+        {% endfor %}
       </select>
     </div>
     <button class="btn btn-primary" type="submit">Editar</button>
