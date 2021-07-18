@@ -16,6 +16,9 @@ def index(request):
     return render(request, 'index.html', ctx)
 
 
+def aboutUs(request):
+    return render(request, 'about_us.html')
+
 class CategoryListView(View):
     def get(self, request):
         ctx = {
