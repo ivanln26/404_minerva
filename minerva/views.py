@@ -44,6 +44,24 @@ class CategoryDeleteView(View):
         finally:
             return redirect('category_list')
 
+class CategoryEditView(View):
+    def post(self, request, id):
+        try:
+            category = models.Category.objects.get(pk=id)
+            form = CategoryForm(request.POST, instance=category)
+            if not form.is_valid():
+                # TODO(any): show form errors.
+                messages.error(request, 'Error en formulario.', 'alert-danger')
+                return redirect('category_list')
+            form.save()
+            messages.success(request, 'Categoria editada correctamente.', 'alert-success')
+            return redirect('category_list')
+        except ObjectDoesNotExist:
+            messages.error(request, 'No se pudo encontrar la categoria.', 'alert-danger')
+            return redirect('category_list')
+        
+        
+
 class ProductCreateView(View):
 
     def get(self, request):

@@ -48,12 +48,16 @@
           {% for category in categories %}
           <tr>
             <td>{{ category.id }}</td>
-            <td>{{ category.name }}</td>
-            <td class="text-center">
-              <div class="btn-group btn-group-sm" role="group">
-                <a class="btn btn-outline-danger" href="{% url 'category_delete' category.id %}" role="button"><i class="bi-trash"></i></a>
-              </div>
-            </td>
+            <form action="{% url 'category_edit' category.id %}" method="POST">
+              {% csrf_token %}
+              <td><input type="text" name="name" value="{{ category.name }}"></td>
+              <td class="text-center">
+                <div class="btn-group btn-group-sm" role="group">
+                  <button class="btn btn-outline-primary" type="submit" >Cambiar nombre</button>
+                  <a class="btn btn-outline-danger" href="{% url 'category_delete' category.id %}" role="button"><i class="bi-trash"></i></a>
+                </div>
+              </td>
+            </form>
           </tr>
           {% endfor %}
         </tbody>
