@@ -4,9 +4,11 @@
 
 {% block content %}
 <div class="row">
-  <a href="{% url 'product_list' %}">
-    <i class="bi-arrow-return-left text-dark my-0" style="font-size: 2em;"></i>
-  </a>
+  <div>
+    <a onclick=" window.history.back();" href="#">
+      <i class="bi-arrow-return-left text-dark my-0" style="font-size: 2em;"></i>
+    </a>
+  </div>
 </div>
 <div class="card">
   <img src="http://via.placeholder.com/1280x720" class="card-img-top" alt="...">
