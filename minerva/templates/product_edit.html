@@ -31,7 +31,7 @@
       <select id="id_category" class="form-control" name="category" required>
         <option value="">---------</option>
         {% for category in categories %}
-          <option value="{{ forloop.counter }}"
+          <option value="{{ category.id }}"
             {% if category.id == product.category.id %}
               selected
             {% endif %}

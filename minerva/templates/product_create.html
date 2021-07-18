@@ -3,7 +3,14 @@
 {% block title %}Añadir producto{% endblock %}
 
 {% block content %}
-<h1>Añadir producto</h1>
+<div class="row">
+  <div class="col-4">
+    <a href="{% url 'product_list' %}"><i class="bi-arrow-return-left text-dark" style="font-size: 2em;"></i></a>
+  </div>
+  <div class="col-8">
+    <h1>Añadir producto</h1>
+  </div>
+</div>
 <form action="{% url 'product_create' %}" method="post">
   {% csrf_token %}
   <div class="mb-3">
@@ -23,7 +30,7 @@
     <select id="id_category" class="form-control" name="category" required>
       <option value="" selected>---------</option>
       {% for category in categories %}
-        <option value="{{ forloop.counter }}">{{ category }}</option>
+        <option value="{{ category.id }}">{{ category }}</option>
       {% endfor %}
     </select>
   </div>
