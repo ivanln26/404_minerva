@@ -102,6 +102,13 @@ class ProductListView(View):
         return render(request, 'product_list.html', ctx)
 
 
+class CategoryListView(View):
+    def get(self, request):
+        ctx = {
+            'categories': models.Category.objects.all()
+        }
+        return render(request, 'category_list.html', ctx)
+
 class LoginView(LoginView):
 
     template_name = 'login.html'

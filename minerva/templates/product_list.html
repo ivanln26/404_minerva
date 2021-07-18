@@ -15,7 +15,7 @@
         </a>
       </div>
       <div class="col px-1 py-1">
-        <a class="btn btn-outline-success" href="{% url 'product_create' %}" role="button">
+        <a class="btn btn-outline-success" href="{% url 'category_list' %}" role="button">
           <i class="bi-plus"></i> categoria
         </a>
       </div>
@@ -52,7 +52,7 @@
           <td>{{ product.price }}</td>
           <td>{{ product.stock }}</td>
           <td>{{ product.category }}</td>
-          <td>
+          <td class="text-center">
             <div class="btn-group btn-group-sm" role="group">
               <a class="btn btn-outline-primary" href="{% url 'product_detail' product.id %}" role="button"><i class="bi-eye"></i></a>
               <a class="btn btn-outline-dark" href="{% url 'product_edit' product.id %}" role="button"><i class="bi-pencil-fill"></i></a>

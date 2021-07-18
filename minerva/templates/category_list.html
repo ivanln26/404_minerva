@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de categorias{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-4 mx-0 my-auto text-center">
+        <a href="{% url 'product_list' %}"><i class="bi-arrow-return-left text-dark" style="font-size: 2em;"></i></a>
+    </div>
+    <div class="col-8 mx-0 my-auto">
+      <h1>Lista de categorias</h1>
+    </div>
+  </div>
+  <div class="row align-items-center py-1">
+      <div class="col-3 text-center">
+          <h5>Añadir categoria</h5>
+      </div>
+      <div class="col-9">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button class="btn btn-success" type="button" id="button-addon2"><i class="bi-plus"></i></button>
+          </div>
+      </div>
+  </div>
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button class="btn-close" data-bs-dismiss="alert" aria-label="Close" type="button"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    </div>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th class="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for category in categories %}
+          <tr>
+            <td>{{ category.id }}</td>
+            <td>{{ category.name }}</td>
+            <td class="text-center">
+              <div class="btn-group btn-group-sm" role="group">
+                <a class="btn btn-outline-primary" href="{% url 'category_list' %}" role="button"><i class="bi-eye"></i></a>
+                <a class="btn btn-outline-danger" href="{% url 'category_list' %}" role="button"><i class="bi-trash"></i></a>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+{% endblock %}
+
+{% block footer %}
+  {% include 'footer.html' %}
+{% endblock %}
