@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 from django.views import View
 
 from . import models
-from .forms import LoginForm, ProductForm
+from .forms import LoginForm, ProductForm, CategoryForm
 
 
 def index(request):
@@ -15,6 +15,23 @@ def index(request):
     }
     return render(request, 'index.html', ctx)
 
+
+class CategoryListView(View):
+    def get(self, request):
+        ctx = {
+            'categories': models.Category.objects.all()
+        }
+        return render(request, 'category_list.html', ctx)
+
+class CategoryCreateView(View):
+    def post(self, request):
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Categoria añadida correctamente.', 'alert-success')
+        else:
+            messages.error(request, 'No se pudo añadir la categoria.', 'alert-danger')
+        return redirect('category_list')
 
 class ProductCreateView(View):
 
@@ -101,13 +118,6 @@ class ProductListView(View):
         }
         return render(request, 'product_list.html', ctx)
 
-
-class CategoryListView(View):
-    def get(self, request):
-        ctx = {
-            'categories': models.Category.objects.all()
-        }
-        return render(request, 'category_list.html', ctx)
 
 class LoginView(LoginView):
 

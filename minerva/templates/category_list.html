@@ -16,10 +16,13 @@
           <h5>Añadir categoria</h5>
       </div>
       <div class="col-9">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button class="btn btn-success" type="button" id="button-addon2"><i class="bi-plus"></i></button>
-          </div>
+          <form action="{% url 'category_create' %}" method="post">
+            {% csrf_token %}
+              <div class="input-group">
+                <input name="name" type="text" class="form-control" placeholder="Ej: Dummy's">
+                <button class="btn btn-success" type="submit" id="button-addon2"><i class="bi-plus"></i></button>
+              </div>
+          </form>
       </div>
   </div>
     {% if messages %}
@@ -48,7 +51,6 @@
             <td>{{ category.name }}</td>
             <td class="text-center">
               <div class="btn-group btn-group-sm" role="group">
-                <a class="btn btn-outline-primary" href="{% url 'category_list' %}" role="button"><i class="bi-eye"></i></a>
                 <a class="btn btn-outline-danger" href="{% url 'category_list' %}" role="button"><i class="bi-trash"></i></a>
               </div>
             </td>
