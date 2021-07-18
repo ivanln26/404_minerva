@@ -33,6 +33,17 @@ class CategoryCreateView(View):
             messages.error(request, 'No se pudo añadir la categoria.', 'alert-danger')
         return redirect('category_list')
 
+class CategoryDeleteView(View):
+    def get(self, request, id):
+        try:
+            product = models.Category.objects.get(pk=id)
+            product.delete()
+            messages.info(request, 'Categoria eliminada correctamente.', 'alert-warning')
+        except ObjectDoesNotExist:
+            messages.error(request, 'No se pudo eliminar la categoria.', 'alert-danger')
+        finally:
+            return redirect('category_list')
+
 class ProductCreateView(View):
 
     def get(self, request):
@@ -58,7 +69,7 @@ class ProductDeleteView(View):
         try:
             product = models.Product.objects.get(pk=id)
             product.delete()
-            messages.info(request, 'Producto eliminado correctamente.', 'alert-dark')
+            messages.info(request, 'Producto eliminado correctamente.', 'alert-warning')
         except ObjectDoesNotExist:
             messages.error(request, 'No se pudo eliminar el producto.', 'alert-danger')
         finally:

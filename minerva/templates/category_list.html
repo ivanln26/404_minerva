@@ -51,7 +51,7 @@
             <td>{{ category.name }}</td>
             <td class="text-center">
               <div class="btn-group btn-group-sm" role="group">
-                <a class="btn btn-outline-danger" href="{% url 'category_list' %}" role="button"><i class="bi-trash"></i></a>
+                <a class="btn btn-outline-danger" href="{% url 'category_delete' category.id %}" role="button"><i class="bi-trash"></i></a>
               </div>
             </td>
           </tr>
