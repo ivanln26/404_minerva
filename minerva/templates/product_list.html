@@ -3,7 +3,25 @@
 {% block title %}Lista de productos{% endblock %}
 
 {% block content %}
-  <h1>Lista de productos</h1>
+  <div class="row mx-0 py-3">
+    <div class="col-8 mx-0 my-auto">
+      <h1>Lista de productos</h1>
+    </div>
+    <div class="col-4 mx-0 my-auto">
+      <div class="row">
+        <div class="col px-1 py-1">
+          <a class="btn btn-outline-success" href="{% url 'product_create' %}" role="button">
+            <i class="bi-plus"></i> producto
+          </a>
+        </div>
+        <div class="col px-1 py-1">
+          <a class="btn btn-outline-success" href="{% url 'category_list' %}" role="button">
+            <i class="bi-plus"></i> categoría
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
   {% if messages %}
     {% for message in messages %}
       <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
@@ -13,9 +31,6 @@
     {% endfor %}
   {% endif %}
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <a class="btn btn-outline-dark" href="{% url 'product_create' %}" role="button">
-      Añadir producto
-    </a>
   </div>
   <div class="table-responsive">
     <table class="table table-hover">
@@ -37,11 +52,11 @@
           <td>{{ product.price }}</td>
           <td>{{ product.stock }}</td>
           <td>{{ product.category }}</td>
-          <td>
+          <td class="text-center">
             <div class="btn-group btn-group-sm" role="group">
-              <a class="btn btn-outline-dark" href="{% url 'product_detail' product.id %}" role="button">Ver</a>
-              <a class="btn btn-outline-dark" href="{% url 'product_edit' product.id %}" role="button">Editar</a>
-              <a class="btn btn-outline-danger" href="{% url 'product_delete' product.id %}" role="button">Eliminar</a>
+              <a class="btn btn-outline-primary" href="{% url 'product_detail' product.id %}" role="button"><i class="bi-eye"></i></a>
+              <a class="btn btn-outline-dark" href="{% url 'product_edit' product.id %}" role="button"><i class="bi-pencil-fill"></i></a>
+              <a class="btn btn-outline-danger" href="{% url 'product_delete' product.id %}" role="button"><i class="bi-trash"></i></a>
             </div>
           </td>
         </tr>
@@ -49,4 +64,8 @@
       </tbody>
     </table>
   </div>
+{% endblock %}
+
+{% block footer %}
+  {% include 'footer.html' %}
 {% endblock %}
