@@ -3,7 +3,16 @@
 {% block title %}Añadir cliente{% endblock %}
 
 {% block content %}
-  <h1>Añadir cliente</h1>
+<div class="row">
+  <div class="col-4">
+    <a href="{% url 'client_list' %}">
+      <i class="bi-arrow-return-left text-dark my-0" style="font-size: 2em;"></i>
+    </a>
+  </div>
+  <div class="col-8">
+    <h1>Editar cliente</h1>
+  </div>
+</div>
   {% if messages %}
     {% for message in messages %}
       <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">

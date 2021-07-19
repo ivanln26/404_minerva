@@ -14,7 +14,7 @@
   {% endif %}
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
     <a class="btn btn-outline-dark" href="{% url 'client_create' %}" role="button">
-      Añadir cliente
+      <i class="bi-plus"></i> cliente
     </a>
   </div>
   <div class="table-responsive">
@@ -39,12 +39,16 @@
             <td>{{ client.dni }}</td>
             <td>{{ client.phone|default:"-" }}</td>
             <td>{{ client.email|default:"-" }}</td>
-            <td>
-              <a class="btn btn-sm btn-outline-dark" href="{% url 'client_edit' client.id %}" role="button">Editar</a>
+            <td class="text-center">
+              <a class="btn btn-sm btn-outline-dark" href="{% url 'client_edit' client.id %}" role="button"><i class="bi-pencil-fill"></i></a>
             </td>
           </tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
+{% endblock %}
+
+{% block footer %}
+  {% include 'footer.html' %}
 {% endblock %}
