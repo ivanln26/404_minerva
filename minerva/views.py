@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 from django.views import View
 
 from . import models
-from .forms import ClientForm, LoginForm, ProductForm
+from .forms import CategoryForm, ClientForm, LoginForm, ProductForm
 
 
 def index(request):
@@ -14,6 +14,62 @@ def index(request):
         'products': products
     }
     return render(request, 'index.html', ctx)
+
+
+def aboutUs(request):
+    return render(request, 'about_us.html')
+
+
+class CategoryCreateView(View):
+
+    def post(self, request):
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Categoría añadida correctamente.', 'alert-success')
+        else:
+            messages.error(request, 'No se pudo añadir la categoría.', 'alert-danger')
+        return redirect('category_list')
+
+
+class CategoryDeleteView(View):
+
+    def get(self, request, id):
+        try:
+            product = models.Category.objects.get(pk=id)
+            product.delete()
+            messages.info(request, 'Categoría eliminada correctamente.', 'alert-warning')
+        except ObjectDoesNotExist:
+            messages.error(request, 'No se pudo eliminar la categoría.', 'alert-danger')
+        finally:
+            return redirect('category_list')
+
+
+class CategoryEditView(View):
+
+    def post(self, request, id):
+        try:
+            category = models.Category.objects.get(pk=id)
+            form = CategoryForm(request.POST, instance=category)
+            if not form.is_valid():
+                # TODO(any): show form errors.
+                messages.error(request, 'Error en formulario.', 'alert-danger')
+                return redirect('category_list')
+            form.save()
+            messages.success(request, 'Categoria editada correctamente.', 'alert-success')
+            return redirect('category_list')
+        except ObjectDoesNotExist:
+            messages.error(request, 'No se pudo encontrar la categoria.', 'alert-danger')
+            return redirect('category_list')
+
+
+class CategoryListView(View):
+
+    def get(self, request):
+        ctx = {
+            'categories': models.Category.objects.all(),
+        }
+        return render(request, 'category_list.html', ctx)
 
 
 class ClientCreateView(View):
@@ -72,7 +128,11 @@ class ClientListView(View):
 class ProductCreateView(View):
 
     def get(self, request):
-        return render(request, 'product_create.html')
+        categories = models.Category.objects.all()
+        ctx = {
+            'categories': categories,
+        }
+        return render(request, 'product_create.html', ctx)
 
     def post(self, request):
         form = ProductForm(request.POST)
@@ -90,7 +150,7 @@ class ProductDeleteView(View):
         try:
             product = models.Product.objects.get(pk=id)
             product.delete()
-            messages.info(request, 'Producto eliminado correctamente.', 'alert-dark')
+            messages.info(request, 'Producto eliminado correctamente.', 'alert-warning')
         except ObjectDoesNotExist:
             messages.error(request, 'No se pudo eliminar el producto.', 'alert-danger')
         finally:
@@ -114,10 +174,12 @@ class ProductDetailView(View):
 class ProductEditView(View):
 
     def get(self, request, id):
+        categories = models.Category.objects.all()
         try:
             product = models.Product.objects.get(pk=id)
             ctx = {
                 'product': product,
+                'categories': categories
             }
             return render(request, 'product_edit.html', ctx)
         except ObjectDoesNotExist:

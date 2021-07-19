@@ -6,6 +6,11 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('about_us', views.aboutUs, name='about_us'),
+    path('categories/', views.CategoryListView.as_view(), name='category_list'),
+    path('category/create', views.CategoryCreateView.as_view(), name='category_create'),
+    path('category/delete/<int:id>', views.CategoryDeleteView.as_view(), name='category_delete'),
+    path('category/edit/<int:id>', views.CategoryEditView.as_view(), name='category_edit'),
     path('client/create', views.ClientCreateView.as_view(), name='client_create'),
     path('client/edit/<int:id>', views.ClientEditView.as_view(), name='client_edit'),
     path('clients/', views.ClientListView.as_view(), name='client_list'),
