@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
 
-from .models import Product, Category
+from .models import Category, Product
 
 
 class LoginForm(AuthenticationForm):
@@ -18,6 +18,7 @@ class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = '__all__'
+
 
 class CategoryForm(forms.ModelForm):
 

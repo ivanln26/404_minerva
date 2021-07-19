@@ -11,16 +11,14 @@
       {% endblock %}
     </title>
   </head>
-  <body class="bg-light" >
+  <body class="bg-light">
     {% include 'navbar.html' %}
-    <!-- remove blank space below footer in mobile: style="height: 100vh;" (in container below)  -->
     <div class="container bg-white mb-4 py-2 rounded" style="margin-top: 75px;">
       {% block content %}
       {% endblock %}
     </div>
     {% block features %}
     {% endblock %}
-
     {% block footer %}
     {% endblock %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>

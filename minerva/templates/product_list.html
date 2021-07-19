@@ -3,25 +3,25 @@
 {% block title %}Lista de productos{% endblock %}
 
 {% block content %}
-<div class="row mx-0 py-3">
-  <div class="col-8 mx-0 my-auto">
-    <h1>Lista de productos</h1>
-  </div>
-  <div class="col-4 mx-0 my-auto">
-    <div class="row">
-      <div class="col px-1 py-1">
-        <a class="btn btn-outline-success" href="{% url 'product_create' %}" role="button">
-          <i class="bi-plus"></i> producto
-        </a>
-      </div>
-      <div class="col px-1 py-1">
-        <a class="btn btn-outline-success" href="{% url 'category_list' %}" role="button">
-          <i class="bi-plus"></i> categoria
-        </a>
+  <div class="row mx-0 py-3">
+    <div class="col-8 mx-0 my-auto">
+      <h1>Lista de productos</h1>
+    </div>
+    <div class="col-4 mx-0 my-auto">
+      <div class="row">
+        <div class="col px-1 py-1">
+          <a class="btn btn-outline-success" href="{% url 'product_create' %}" role="button">
+            <i class="bi-plus"></i> producto
+          </a>
+        </div>
+        <div class="col px-1 py-1">
+          <a class="btn btn-outline-success" href="{% url 'category_list' %}" role="button">
+            <i class="bi-plus"></i> categoría
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
   {% if messages %}
     {% for message in messages %}
       <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">

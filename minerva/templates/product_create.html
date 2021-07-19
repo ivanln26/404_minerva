@@ -3,39 +3,39 @@
 {% block title %}Añadir producto{% endblock %}
 
 {% block content %}
-<div class="row">
-  <div class="col-4">
-    <a href="{% url 'product_list' %}"><i class="bi-arrow-return-left text-dark" style="font-size: 2em;"></i></a>
+  <div class="row">
+    <div class="col-4">
+      <a href="{% url 'product_list' %}"><i class="bi-arrow-return-left text-dark" style="font-size: 2em;"></i></a>
+    </div>
+    <div class="col-8">
+      <h1>Añadir producto</h1>
+    </div>
   </div>
-  <div class="col-8">
-    <h1>Añadir producto</h1>
-  </div>
-</div>
-<form action="{% url 'product_create' %}" method="post">
-  {% csrf_token %}
-  <div class="mb-3">
-    <label class="form-label" for="id_name">Nombre</label>
-    <input id="id_name" class="form-control" name="name" maxlength="25" required type="text">
-  </div>
-  <div class="mb-3">
-    <label class="form-label" for="id_price">Precio</label>
-    <input id="id_price" class="form-control" name="price" step="any" required type="number">
-  </div>
-  <div class="mb-3">
-    <label class="form-label" for="id_stock">Stock</label>
-    <input id="id_stock" class="form-control" name="stock" value="0" min="0" required type="number">
-  </div>
-  <div class="mb-3">
-    <label class="form-label" for="id_category">Categoría</label>
-    <select id="id_category" class="form-control" name="category" required>
-      <option value="" selected>---------</option>
-      {% for category in categories %}
-        <option value="{{ category.id }}">{{ category }}</option>
-      {% endfor %}
-    </select>
-  </div>
-  <button class="btn btn-primary" type="submit">Añadir</button>
-</form>
+  <form action="{% url 'product_create' %}" method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label class="form-label" for="id_name">Nombre</label>
+      <input id="id_name" class="form-control" name="name" maxlength="25" required type="text">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="id_price">Precio</label>
+      <input id="id_price" class="form-control" name="price" step="any" required type="number">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="id_stock">Stock</label>
+      <input id="id_stock" class="form-control" name="stock" value="0" min="0" required type="number">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="id_category">Categoría</label>
+      <select id="id_category" class="form-control" name="category" required>
+        <option value="" selected>---------</option>
+        {% for category in categories %}
+          <option value="{{ category.id }}">{{ category }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button class="btn btn-primary" type="submit">Añadir</button>
+  </form>
 {% endblock %}
 
 {% block footer %}

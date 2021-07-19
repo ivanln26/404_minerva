@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 from django.views import View
 
 from . import models
-from .forms import LoginForm, ProductForm, CategoryForm
+from .forms import CategoryForm, LoginForm, ProductForm
 
 
 def index(request):
@@ -19,35 +19,34 @@ def index(request):
 def aboutUs(request):
     return render(request, 'about_us.html')
 
-class CategoryListView(View):
-    def get(self, request):
-        ctx = {
-            'categories': models.Category.objects.all()
-        }
-        return render(request, 'category_list.html', ctx)
 
 class CategoryCreateView(View):
+
     def post(self, request):
         form = CategoryForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Categoria añadida correctamente.', 'alert-success')
+            messages.success(request, 'Categoría añadida correctamente.', 'alert-success')
         else:
-            messages.error(request, 'No se pudo añadir la categoria.', 'alert-danger')
+            messages.error(request, 'No se pudo añadir la categoría.', 'alert-danger')
         return redirect('category_list')
 
+
 class CategoryDeleteView(View):
+
     def get(self, request, id):
         try:
             product = models.Category.objects.get(pk=id)
             product.delete()
-            messages.info(request, 'Categoria eliminada correctamente.', 'alert-warning')
+            messages.info(request, 'Categoría eliminada correctamente.', 'alert-warning')
         except ObjectDoesNotExist:
-            messages.error(request, 'No se pudo eliminar la categoria.', 'alert-danger')
+            messages.error(request, 'No se pudo eliminar la categoría.', 'alert-danger')
         finally:
             return redirect('category_list')
 
+
 class CategoryEditView(View):
+
     def post(self, request, id):
         try:
             category = models.Category.objects.get(pk=id)
@@ -62,8 +61,16 @@ class CategoryEditView(View):
         except ObjectDoesNotExist:
             messages.error(request, 'No se pudo encontrar la categoria.', 'alert-danger')
             return redirect('category_list')
-        
-        
+
+
+class CategoryListView(View):
+
+    def get(self, request):
+        ctx = {
+            'categories': models.Category.objects.all(),
+        }
+        return render(request, 'category_list.html', ctx)
+
 
 class ProductCreateView(View):
 
