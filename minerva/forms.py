@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
 
-from .models import Category, Product
+from .models import Category, Client, Product
 
 
 class LoginForm(AuthenticationForm):
@@ -13,15 +13,22 @@ class LoginForm(AuthenticationForm):
     )
 
 
-class ProductForm(forms.ModelForm):
-
-    class Meta:
-        model = Product
-        fields = '__all__'
-
-
 class CategoryForm(forms.ModelForm):
 
     class Meta:
         model = Category
+        fields = '__all__'
+
+
+class ClientForm(forms.ModelForm):
+
+    class Meta:
+        model = Client
+        fields = '__all__'
+
+
+class ProductForm(forms.ModelForm):
+
+    class Meta:
+        model = Product
         fields = '__all__'

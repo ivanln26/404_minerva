@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Añadir cliente{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-4">
+    <a href="{% url 'client_list' %}">
+      <i class="bi-arrow-return-left text-dark my-0" style="font-size: 2em;"></i>
+    </a>
+  </div>
+  <div class="col-8">
+    <h1>Editar cliente</h1>
+  </div>
+</div>
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button class="btn-close" data-bs-dismiss="alert" aria-label="Close" type="button"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+  <form action="{% url 'client_edit' client.id %}" method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label class="form-label" for="id_first_name">Nombre</label>
+      <input
+        id="id_first_name"
+        class="form-control"
+        name="first_name"
+        maxlength="15"
+        value="{{ client.first_name }}"
+        required
+        type="text"
+      >
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="id_last_name">Apellido</label>
+      <input
+        id="id_last_name"
+        class="form-control"
+        name="last_name"
+        maxlength="15"
+        value="{{ client.last_name }}"
+        required
+        type="text"
+      >
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="id_dni">DNI</label>
+      <input id="id_dni" class="form-control" name="dni" maxlength="10" value="{{ client.dni }}" type="text">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="id_phone">Teléfono</label>
+      <input id="id_phone" class="form-control" name="phone" maxlength="20" value="{{ client.phone }}" type="text">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="id_email">Email</label>
+      <input id="id_email" class="form-control" name="email" value="{{ client.email }}"type="email">
+    </div>
+    <button class="btn btn-primary" type="submit">Añadir</button>
+  </form>
+{% endblock %}
